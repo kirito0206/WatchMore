@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_theme"
+        android:icon="@drawable/ic_color_lens_black_24dp"
+        android:title="主题"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="注销"
+        app:showAsAction="ifRoom" />
+</menu>

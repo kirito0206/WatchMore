@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="searchEditColor" format="color" />
+    <attr name="mainPrimaryTextColor" format="color" />
+    <attr name="mainPrimaryLightTextColor" format="color" />
+    <attr name="mainBgColor" format="color" />
+
+    <declare-styleable name="RatioImageView">
+        <attr name="ratio" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="NineGridLayout">
+        <attr name="sapcing" format="dimension"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="comment"
+            type="com.example.watchmore.model.bean.animebean.Comment" />
+        <variable
+            name="data"
+            type="com.example.watchmore.viewmodel.AnimeDetailViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/text_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="6dp"
+            android:textSize="20dp"
+            android:text="@{comment.username}"/>
+        <TextView
+            android:id="@+id/text_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/text_one"
+            android:text="@{comment.comment}"/>
+        <TextView
+            android:id="@+id/text_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_two"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="6dp"
+            android:text="@{Integer.toString(comment.starnum)}"/>
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_below="@id/text_two"
+            android:layout_toLeftOf="@id/text_three"
+            android:layout_marginBottom="6dp"
+            android:onClick="@{()->data.changeStarComment(comment)}"
+            imageStar="@{comment.islike}"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_two"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="6dp"
+            android:layout_marginBottom="6dp"
+            android:text="@{comment.time}"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:background="#D3D3D3"/>
+
+    </RelativeLayout>
+</layout>

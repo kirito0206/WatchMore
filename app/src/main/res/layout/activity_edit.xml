@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.example.watchmore.viewmodel.EditViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.EditActivity">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_close_black_24dp"
+                    android:onClick="@{(view)->data.close(view)}"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#FEFEFD"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    android:text='@{data.editType == 1?"问番":"荐番"}'/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_send_black_24dp"
+                    android:onClick="@{(view)->data.update(view)}"/>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <EditText
+            android:id="@+id/ev_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:hint="标题"
+            android:text="@={data.title}"/>
+        <EditText
+            android:id="@+id/ev_text"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@id/ev_title"
+            android:gravity="top"
+            android:text="@={data.content}"
+            android:hint="@string/edit_hint"/>
+        <TextView
+            app:layout_constraintEnd_toEndOf="@id/ev_text"
+            app:layout_constraintBottom_toBottomOf="@id/ev_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="?attr/colorPrimary"
+            android:text="添加图片"
+            android:onClick="@{(view)->data.pickPhotos(view)}"/>
+        <com.example.watchmore.ui.view.NineGridTestLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ev_text"
+            android:layout_margin="16dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

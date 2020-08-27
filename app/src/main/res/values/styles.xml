@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--换肤-->
+    <style name="AppThemeNoActionBar.Green">
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="colorAccent">#F3F5F3</item>
+        <item name="searchEditColor">#9BCD9B</item>
+    </style>
+
+    <style name="AppThemeNoActionBar.Blue">
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimaryDark">#1976D2</item>
+        <item name="colorAccent">#607D8B</item>
+        <item name="searchEditColor">#D1EEEE</item>
+    </style>
+
+    <style name="AppThemeNoActionBar.Yellow">
+        <item name="colorPrimary">#FFC107</item>
+        <item name="colorPrimaryDark">#FF9800</item>
+        <item name="colorAccent">#927215</item>
+        <item name="searchEditColor">#EEE685</item>
+    </style>
+
+    <style name="AppThemeNoActionBar.Grey">
+        <item name="colorPrimary">#607D8B</item>
+        <item name="colorPrimaryDark">#455A64</item>
+        <item name="colorAccent">#58575A</item>
+        <item name="searchEditColor">#F2F2F2</item>
+    </style>
+</resources>

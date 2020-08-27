@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.example.watchmore.viewmodel.RegisterViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        tools:context=".activity.LoginActivity">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="329dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/login" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="278dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/shape_login_form"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="43dp"
+                android:paddingRight="31dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_baseline_person_24" />
+
+                    <EditText
+                        android:id="@+id/et_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@null"
+                        android:hint="@string/account_hint"
+                        android:textColor="#000000"
+                        android:textColorHint="#bcbcbc"
+                        android:text="@={data.loginAccount}"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginBottom="23dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_baseline_email_24" />
+
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@null"
+                        android:hint="@string/email_hint"
+                        android:textColor="@color/black"
+                        android:textColorHint="#bcbcbc"
+                        android:text="@={data.loginEmail}"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginBottom="23dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_baseline_vpn_key_24" />
+
+                    <EditText
+                        android:id="@+id/et_pwd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@null"
+                        android:inputType="textPassword"
+                        android:hint="@string/pwd_hint"
+                        android:textColor="@color/black"
+                        android:textColorHint="#bcbcbc"
+                        android:text="@={data.loginPasswd}"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginBottom="23dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_baseline_vpn_key_24" />
+
+                    <EditText
+                        android:id="@+id/et_repeatpwd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@null"
+                        android:inputType="textPassword"
+                        android:hint="@string/repeatpwd_hint"
+                        android:textColor="@color/black"
+                        android:textColorHint="#bcbcbc"
+                        android:text="@={data.loginRepeatpwd}"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="67dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/shape_big_register_btn"
+                android:text="@string/register"
+                android:textColor="@color/white"
+                android:onClick="@{(view)->data.loadDatas(view)}"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toLogin"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="right"
+                android:clickable="true"
+                android:onClick="@{(view)->data.intentToLogin(view)}"/>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
