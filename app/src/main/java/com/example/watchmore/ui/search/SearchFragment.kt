@@ -15,18 +15,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.watchmore.R
 import com.example.watchmore.databinding.FragmentSearchBinding
-import com.example.watchmore.model.bean.animebean.AnimeData
 import com.zhouwei.mzbanner.holder.MZHolderCreator
 import com.zhouwei.mzbanner.holder.MZViewHolder
-import java.util.Observer
 
 
 class SearchFragment : Fragment() {
 
     private lateinit var searchBinding : FragmentSearchBinding
     private lateinit var searchViewModel: SearchViewModel
-    private var timeLinearLayoutList : ArrayList<LinearLayout> = ArrayList()
-    private var timeTagList : ArrayList<TextView> = ArrayList()
+    private var styleLinearLayoutList : ArrayList<LinearLayout> = ArrayList()
+    private var styleTagList : ArrayList<TextView> = ArrayList()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -58,39 +56,32 @@ class SearchFragment : Fragment() {
     }
     
     private fun initTagView(){
-        timeLinearLayoutList.add(searchBinding.timeTagOne)
-        timeLinearLayoutList.add(searchBinding.timeTagTwo)
-        timeLinearLayoutList.add(searchBinding.timeTagThree)
-        timeLinearLayoutList.add(searchBinding.timeTagFour)
-        timeLinearLayoutList.add(searchBinding.timeTagFive)
-        var timeList = searchViewModel.getTimeTagMap().toList()
-        for ((i, linearView) in timeLinearLayoutList.withIndex()){
-            for (k in i*3..i*3+2){
-                if (k < timeList.size){
+        styleLinearLayoutList.add(searchBinding.styleTagOne)
+        styleLinearLayoutList.add(searchBinding.styleTagTwo)
+        styleLinearLayoutList.add(searchBinding.styleTagThree)
+        styleLinearLayoutList.add(searchBinding.styleTagFour)
+        styleLinearLayoutList.add(searchBinding.styleTagFive)
+        var styleList = searchViewModel.getStyleTagMap().toList()
+        for ((i, linearView) in styleLinearLayoutList.withIndex()){
+            for (k in i*8..i*8+7){
+                if (k < styleList.size){
                     var textView = TextView(context)
-                    textView.text = timeList[k].first
+                    textView.text = styleList[k].second
                     val lp: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
                     )
                     lp.setMargins(32,32,32,32)
-                    textView.setTextColor(Color.BLACK)
+                    textView.setTextColor(Color.WHITE)
                     textView.isClickable = true
                     textView.layoutParams = lp
                     textView.setOnClickListener(View.OnClickListener {
-                        changeColor(timeTagList,textView)
+                        view?.let { it1 -> searchViewModel.intentToMainSearch(it1,styleList[k].first) }
                     })
                     linearView.addView(textView)
-                    timeTagList.add(textView)
+                    styleTagList.add(textView)
                 }
             }
         }
-    }
-
-    private fun changeColor(list: ArrayList<TextView>, textView: TextView) {
-        for (tv in list){
-            tv.setTextColor(Color.BLACK)
-        }
-        textView.setTextColor(R.attr.colorAccent)
     }
 
     class BannerViewHolder : MZViewHolder<Int?> {

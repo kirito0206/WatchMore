@@ -1,16 +1,11 @@
 package com.example.watchmore.viewmodel
 
 import android.app.Application
-import android.content.Intent
-import android.view.View
-import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.watchmore.model.bean.userbean.AccompanyAnime
 import com.example.watchmore.model.bean.userbean.AccompanyAnimeResponse
 import com.example.watchmore.model.network.repository.UserRepository
-import com.example.watchmore.ui.activity.EditActivity
 import com.example.watchmore.util.SPUtils
 import com.example.watchmore.util.debug
 import com.example.watchmore.util.toast

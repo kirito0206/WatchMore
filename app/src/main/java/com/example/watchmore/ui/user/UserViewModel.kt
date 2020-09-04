@@ -57,6 +57,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
             collects.value = response.value!!.data.collects.toString()
             recommend.value = "我的推荐 ${response.value!!.data.Rdramas.toString()} "
             question.value = "我的问番 ${response.value!!.data.Adramas.toString()} "
+            SPUtils.putData(context,SPUtils.USER_FILE,SPUtils.UserKey.USER_USERID,response.value!!.data.userid)
         }
         debug(response.value.toString())
     }

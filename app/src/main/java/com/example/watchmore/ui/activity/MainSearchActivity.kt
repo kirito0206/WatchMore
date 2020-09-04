@@ -17,6 +17,9 @@ class MainSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainSearchViewModel =
             ViewModelProviders.of(this).get(MainSearchViewModel::class.java)
+        var tagid = intent.getStringExtra("tagid")
+        mainSearchViewModel.tagid = tagid
+        mainSearchViewModel.loadDatas()
         mainSearchBinding = ActivityMainSearchBinding.inflate(layoutInflater,null,false)
         mainSearchBinding.data = mainSearchViewModel
         mainSearchBinding.lifecycleOwner = this

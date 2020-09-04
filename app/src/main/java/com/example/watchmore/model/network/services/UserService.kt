@@ -56,4 +56,7 @@ interface UserService {
     @FormUrlEncoded
     @POST("person/ask")
     suspend fun getQuestions(@Field("token") token: String,@Field("userid") userid: Int?) : AccompanyAnimeResponse
+
+    @DELETE("user/ask")
+    suspend fun deleteQuestion(@Field("token") token : String, @Field("dramaid") dramaid : Int) : CommonResponse
 }

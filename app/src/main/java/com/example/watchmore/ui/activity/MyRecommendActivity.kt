@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.example.watchmore.databinding.ActivityMyRecommendBinding
+import com.example.watchmore.util.ThemeUtil
 import com.example.watchmore.viewmodel.MyRecommendViewModel
 
 class MyRecommendActivity : AppCompatActivity() {
@@ -12,6 +13,7 @@ class MyRecommendActivity : AppCompatActivity() {
     private lateinit var myRecommendViewModel: MyRecommendViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeUtil.setBaseTheme(this)
         super.onCreate(savedInstanceState)
         myRecommendViewModel =
             ViewModelProviders.of(this).get(MyRecommendViewModel::class.java)

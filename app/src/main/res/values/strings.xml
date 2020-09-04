@@ -12,7 +12,8 @@
     <string name="email_hint">请输入邮箱</string>
     <string name="pwd_hint">请输入密码</string>
     <string name="repeatpwd_hint">请确认密码</string>
-    <string name="edit_hint">输入发表内容</string>
+    <string name="edit_hint0">输入发表内容</string>
+    <string name="edit_hint1">输入动漫表述</string>
     <string name="search_hint">番剧搜索</string>
     <string name="follow_text">关注数</string>
     <string name="fan_text">粉丝数</string>

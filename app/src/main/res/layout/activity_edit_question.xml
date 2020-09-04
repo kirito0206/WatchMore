@@ -6,13 +6,13 @@
     <data>
         <variable
             name="data"
-            type="com.example.watchmore.viewmodel.EditViewModel" />
+            type="com.example.watchmore.viewmodel.QuestionEditViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activity.EditActivity">
+        tools:context=".ui.activity.QuestionEditActivity">
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -36,7 +36,7 @@
                     android:textColor="#FEFEFD"
                     android:textSize="24dp"
                     android:textStyle="bold"
-                    android:text='@{data.editType == 1?"问番":"荐番"}'/>
+                    android:text="问番"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/ev_title"
             android:gravity="top"
             android:text="@={data.content}"
-            android:hint="@string/edit_hint"/>
+            android:hint="@string/edit_hint0"/>
         <TextView
             app:layout_constraintEnd_toEndOf="@id/ev_text"
             app:layout_constraintBottom_toBottomOf="@id/ev_text"
@@ -77,6 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/ev_text"
-            android:layout_margin="16dp"/>
+            android:layout_margin="16dp"
+            urlList="@{data.photos}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -26,7 +26,7 @@ data class Comment(
     val comment: String,
     val commentid: Int,
     val starnum: Int,
-    val islike: Boolean,
+    var islike: Boolean,
     val time : String,
     val username: String
 )

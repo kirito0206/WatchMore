@@ -3,16 +3,15 @@ package com.example.watchmore.ui.view
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.example.watchmore.R
 import com.example.watchmore.ui.adapter.MyPagerAdapter
 import com.example.watchmore.util.ImageLoaderUtil
 import com.nostra13.universalimageloader.core.assist.FailReason
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener
-import kotlinx.android.synthetic.main.dialog_top.view.*
+import java.io.File
 
 
 class NineGridTestLayout : NineGridLayout {
@@ -75,13 +74,24 @@ class NineGridTestLayout : NineGridLayout {
         imageView: RatioImageView?,
         url: String?
     ) {
-        //ImageLoaderUtil.getImageLoader(mContext)
-            //.displayImage(url, imageView, ImageLoaderUtil.getPhotoImageOption())
-        if (imageView != null) {
+        url?.let {
+            if (it.contains("Camera") || it.contains("storage") || it.contains("emulated")){
+                var file = File(url)
+                var bitmap = BitmapFactory.decodeFile(url)
+                imageView?.setImageBitmap(bitmap)
+                return
+            }
+        }
+
+        ImageLoaderUtil.getImageLoader(mContext)
+            .displayImage(url, imageView, ImageLoaderUtil.getPhotoImageOption())
+        /*if (imageView != null) {
             Glide.with(context).load(url)
                 .into(imageView)
-        }
+        }*/
     }
+
+
 
     override fun onClickImage(
         i: Int,
@@ -91,6 +101,8 @@ class NineGridTestLayout : NineGridLayout {
 
         Toast.makeText(mContext, "点击了图片$url", Toast.LENGTH_SHORT).show()
     }
+
+
 
     companion object {
         protected const val MAX_W_H_RATIO = 3

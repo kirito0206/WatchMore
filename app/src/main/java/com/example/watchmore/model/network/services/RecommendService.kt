@@ -3,20 +3,22 @@ package com.example.watchmore.model.network.services
 import com.example.watchmore.model.bean.CommonResponse
 import com.example.watchmore.model.bean.questionbean.QuestionResponse
 import com.example.watchmore.model.bean.recommendbean.RecommendResponse
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 interface RecommendService {
 
-    @GET("recommend/get")
-    suspend fun getAllRecommend() : RecommendResponse
+    @FormUrlEncoded
+    @POST("recommend/get")
+    suspend fun getAllRecommend(@Field("page") page : Int) : RecommendResponse
 
-    @GET("recommend/get")
-    suspend fun getSingleRecommend() : RecommendResponse
+    @FormUrlEncoded
+    @POST("recommend/get")
+    suspend fun getRecommendDetail(@Field("dramaid") dramaid : Int) : RecommendResponse
 
+    @Multipart
     @POST("recommend")
-    suspend fun createRecommend() : CommonResponse
+    suspend fun createRecommend(@Part parts : List<MultipartBody.Part>) : CommonResponse
 
     @POST("recommend/comment")
     suspend fun createRecommendComment() : CommonResponse

@@ -1,6 +1,7 @@
 package com.example.watchmore.model.network.repository
 
 import com.example.watchmore.model.network.RetrofitHelper
+import okhttp3.MultipartBody
 import java.io.File
 
 class QuestionRepository {
@@ -8,5 +9,7 @@ class QuestionRepository {
 
     suspend fun getAllQuetions(page : Int) = questionService.getAllQuetions(page)
 
-    suspend fun createQuestion(token: String, title: String, content: String, file: File?) = questionService.createQuestion(token,title,content,file)
+    suspend fun createQuestion(parts : List<MultipartBody.Part>) = questionService.createQuestion(parts)
+
+    suspend fun getQuestionDetail(dramaid : Int) = questionService.getQuestionDetail(dramaid)
 }

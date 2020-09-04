@@ -125,8 +125,15 @@ class AnimeDetailViewModel(application: Application) : AndroidViewModel(applicat
             return
         }
         if (result.status == 0){
-            toast(context,"操作成功！！")
-            loadDatas()
+            if (islike.value!!){
+                toast(context,"取消赞成功！！")
+                islike.value = false
+                likeNum.value = "共有${response.value!!.data.likenum -1}人想看"
+            }else{
+                toast(context,"点赞成功！！")
+                islike.value = true
+                likeNum.value = "共有${response.value!!.data.likenum +1}人想看"
+            }
         }
     }
 

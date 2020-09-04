@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.example.watchmore.databinding.ActivityAnimeDetailBinding
-import com.example.watchmore.databinding.ActivityEditBinding
 import com.example.watchmore.util.ThemeUtil
 import com.example.watchmore.viewmodel.AnimeDetailViewModel
-import com.example.watchmore.viewmodel.EditViewModel
 
 class AnimeDetailActivity : AppCompatActivity() {
 

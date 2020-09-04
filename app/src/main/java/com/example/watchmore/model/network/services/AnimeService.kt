@@ -13,7 +13,8 @@ interface AnimeService {
     @GET("getallanime")
     suspend fun getAllAnimes() : AnimeSearchResponse
 
-    @POST("getanime")
+    @FormUrlEncoded
+    @POST("getallanime")
     suspend fun getSearchAnimes(@Field("tagid") tagid : String) : AnimeSearchResponse
 
     @FormUrlEncoded

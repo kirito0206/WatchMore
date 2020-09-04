@@ -114,6 +114,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
+                            android:paddingVertical="16dp"
                             android:text="暂无评论快来想想骚话吧！！"
                             android:visibility="@{data.commentList.size()>0?View.GONE:View.VISIBLE}"/>
                     </androidx.cardview.widget.CardView>

@@ -4,16 +4,16 @@ import android.app.Application
 import android.content.Intent
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.watchmore.model.bean.animebean.AnimeSearchResponse
+import com.example.watchmore.model.bean.questionbean.QuestionBean
+import com.example.watchmore.model.bean.recommendbean.RecommendBean
 import com.example.watchmore.model.bean.recommendbean.RecommendResponse
-import com.example.watchmore.model.network.repository.AnimeRepository
+import com.example.watchmore.model.bean.userbean.UserBean
 import com.example.watchmore.model.network.repository.RecommendRepository
 import com.example.watchmore.model.network.repository.UserRepository
-import com.example.watchmore.ui.activity.EditActivity
+import com.example.watchmore.ui.activity.QuestionEditActivity
 import com.example.watchmore.ui.activity.MyRecommendActivity
+import com.example.watchmore.ui.activity.RecommendEditActivity
 import com.example.watchmore.util.debug
 import com.example.watchmore.util.toast
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +25,10 @@ class RecommendViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val response = MutableLiveData<RecommendResponse>().also { loadDatas() }
     private val repository by lazy { RecommendRepository() }
+    private val userRepository by lazy { UserRepository() }
+    val recommendList = MutableLiveData<ArrayList<RecommendBean>>()
+    val usersList = MutableLiveData<ArrayList<UserBean>>()
+    var page = 1
 
     fun intentToMyRecommend(view : View){
         var intent = Intent(view.context, MyRecommendActivity::class.java)
@@ -32,8 +36,7 @@ class RecommendViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun intentToEdit(view: View){
-        var intent = Intent(view.context, EditActivity::class.java)
-        intent.putExtra("editType",2)
+        var intent = Intent(view.context, RecommendEditActivity::class.java)
         view.context?.startActivity(intent)
     }
 
@@ -50,7 +53,7 @@ class RecommendViewModel(application: Application) : AndroidViewModel(applicatio
             return
         }
         val result = withContext(Dispatchers.IO){
-            repository.getAllRecommend()
+            repository.getAllRecommend(page)
         }
         response.value = result
         if (response.value == null){
@@ -58,8 +61,10 @@ class RecommendViewModel(application: Application) : AndroidViewModel(applicatio
             return
         }
         if (response.value!!.status == 0){
+            recommendList.value = response.value!!.data as ArrayList<RecommendBean>
 
-        }
+        }else
+            page = 0
         debug(response.value.toString())
     }
 }

@@ -7,13 +7,13 @@ data class QuestionResponse(
 )
 
 data class QuestionBean(
-    val authorid: Int,
-    val authorname: String,
-    val comment: List<QuestionComment>,
-    val content: String,
+    val authorid: Int?,
+    val authorname: String?,
+    val comment: List<QuestionComment>?,
+    val content: String?,
     val dramaid: Int,
     val photos: List<String>,
-    val time: String,
+    val time: String?,
     val title: String
 )
 

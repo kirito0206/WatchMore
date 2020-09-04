@@ -1,6 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="data"
+            type="com.example.watchmore.viewmodel.CommonViewModel" />
+        <variable
+            name="recommend"
+            type="com.example.watchmore.model.bean.recommendbean.RecommendBean" />
+        <variable
+            name="user"
+            type="com.example.watchmore.model.bean.userbean.UserBean" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:onClick="@{(view)->data.intentToRecommendDetail(view,recommend.dramaid)}">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userProfilePicImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:scaleType="centerCrop"
+                    imageUrl="@{user.avatar}" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/userNameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:maxLines="1"
+                        android:textSize="18sp"
+                        tools:text="@{user.name}" />
+
+                    <TextView
+                        android:id="@+id/messageTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-light"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        android:visibility="@{recommend.time == null?View.GONE:View.VISIBLE}"
+                        tools:text="@{recommend.time}" />
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@{recommend.title}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@{recommend.content}"
+                android:textSize="18sp"
+                android:visibility="@{recommend.content == null ? View.GONE:View.VISIBLE}"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+            <com.example.watchmore.ui.view.NineGridTestLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:sapcing="4dp"
+                urlList="@{recommend.photos}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:layout_gravity="right"
+                android:paddingRight="8dp"
+                userId="@{user.userid}"
+                android:onClick="@{(view)->data.delete(view,recommend.dramaid)}"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

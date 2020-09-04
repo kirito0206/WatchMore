@@ -1,17 +1,15 @@
-package com.example.watchmore.ui.question
+package com.example.watchmore.viewmodel
 
+import android.app.Activity
 import android.app.Application
-import android.content.Intent
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.watchmore.model.bean.questionbean.QuestionBean
+import com.example.watchmore.model.bean.animebean.Comment
 import com.example.watchmore.model.bean.questionbean.QuestionResponse
 import com.example.watchmore.model.bean.userbean.UserBean
 import com.example.watchmore.model.network.repository.QuestionRepository
 import com.example.watchmore.model.network.repository.UserRepository
-import com.example.watchmore.ui.activity.QuestionEditActivity
-import com.example.watchmore.ui.activity.MyQuestionActivity
 import com.example.watchmore.util.debug
 import com.example.watchmore.util.toast
 import kotlinx.coroutines.Dispatchers
@@ -19,57 +17,57 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class QuestionViewModel(application: Application) : AndroidViewModel(application) {
+class QuestionDetaiViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val response = MutableLiveData<QuestionResponse>().also { loadDatas() }
+    val response = MutableLiveData<QuestionResponse>()
+    var name = MutableLiveData<String>()
+    var title = MutableLiveData<String>()
+    var time = MutableLiveData<String>()
+    var content = MutableLiveData<String>()
+    var photos = MutableLiveData<ArrayList<String>>()
+    var comments = MutableLiveData<ArrayList<Comment>>()
+    var user = MutableLiveData<UserBean>()
+    var dramaid = 0
     private val questionRepository by lazy { QuestionRepository() }
     private val userRepository by lazy { UserRepository() }
-    var page = 1
-    val questionsList = MutableLiveData<ArrayList<QuestionBean>>()
-    val usersList = MutableLiveData<ArrayList<UserBean>>()
 
-    fun intentToMyQuestion(view : View){
-        var intent = Intent(view.context, MyQuestionActivity::class.java)
-        view.context?.startActivity(intent)
-    }
-
-    fun intentToEdit(view: View){
-        var intent = Intent(view.context, QuestionEditActivity::class.java)
-        view.context?.startActivity(intent)
+    private suspend fun initQuestion() {
+        var context = getApplication<Application>().applicationContext
+        if (response.value != null){
+            return
+        }
+        val result = withContext(Dispatchers.IO){
+            questionRepository.getQuestionDetail(dramaid)
+        }
+        response.value = result
+        debug(result.toString())
+        if (response.value == null){
+            toast(context,"获取信息失败，请检查网络！！")
+            return
+        }
+        if (response.value!!.status == 0){
+            name.value = response.value!!.data[0].authorname
+            time.value = response.value!!.data[0].time
+            title.value = response.value!!.data[0].title
+            content.value = response.value!!.data[0].content
+            photos.value = response.value!!.data[0].photos as ArrayList<String>
+            comments.value = response.value!!.data[0].comment as ArrayList<Comment>
+            initUsers()
+        }
+        debug(response.value.toString())
     }
 
     fun loadDatas() {
         GlobalScope.launch(Dispatchers.Main) {
-            initQuestions()
+            initQuestion()
         }
         // Do an asynchronous operation to fetch users.
     }
 
-    private suspend fun initQuestions() {
-        var context = getApplication<Application>().applicationContext
-        val result = withContext(Dispatchers.IO){
-            questionRepository.getAllQuetions(page)
-        }
-        response.value = result
-        if (response.value == null){
-            return
-        }
-        if (response.value!!.status == 0){
-            initUsers()
-        }else
-            page = 0
-        debug(response.value.toString())
-    }
-
     fun initUsers(){
-        val usersListTest = ArrayList<UserBean>()
-
         GlobalScope.launch(Dispatchers.Main) {
-            for (question in response.value!!.data){
-                question.authorid?.let { getUser(it)?.let { usersListTest.add(it) } }
-            }
-            usersList.value = usersListTest
-            questionsList.value = response.value!!.data as ArrayList<QuestionBean>
+            var user0 = response.value!!.data[0].authorid?.let { getUser(it) }
+            user.value = user0
         }
     }
 
@@ -88,5 +86,9 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
             toast(context,result.message)
             null
         }
+    }
+
+    fun close(view:View){
+        (view.context as Activity).finish()
     }
 }

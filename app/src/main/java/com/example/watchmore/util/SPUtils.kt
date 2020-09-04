@@ -73,5 +73,6 @@ object SPUtils {
         const val USER_ACCOUNT = "account"
         const val USER_TOKEN = "token"
         const val USER_PASSWORD = "password"
+        const val USER_USERID = "userid"
     }
 }

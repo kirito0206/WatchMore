@@ -22,13 +22,11 @@ class QuestionFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        if (savedInstanceState == null){
-            questionViewModel =
-                ViewModelProviders.of(this).get(QuestionViewModel::class.java)
-            questionBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_question,container,false)
-            questionBinding.data = questionViewModel
-            questionBinding.lifecycleOwner = this
-        }
+        questionViewModel =
+            ViewModelProviders.of(this).get(QuestionViewModel::class.java)
+        questionBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_question,container,false)
+        questionBinding.data = questionViewModel
+        questionBinding.lifecycleOwner = this
         return questionBinding.root
     }
 }

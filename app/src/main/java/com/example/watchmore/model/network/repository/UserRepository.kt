@@ -24,4 +24,6 @@ class UserRepository {
     suspend fun getUserQuestion(token: String,userid: Int?) = userService.getQuestions(token,userid)
 
     suspend fun getUserRecommend(token: String,userid: Int?) = userService.getRecommends(token,userid)
+
+    suspend fun deleteQuestion(token : String,dramaid : Int) = userService.deleteQuestion(token,dramaid)
 }
