@@ -7,20 +7,20 @@ data class RecommendResponse(
 )
 
 data class RecommendBean(
-    val animedescribe: String,
-    val animefrom: Int,
-    val animelink: String,
-    val animepicture: List<String>,
-    val animetitle: String,
+    val animedescribe: String?,
+    val animefrom: Int?,
+    val animelink: String?,
+    val animepicture: List<String>?,
+    val animetitle: String?,
     val authorid: Int,
     val authorname: String,
-    val comment: List<RecommendComment>,
-    val content: String,
+    val comment: List<RecommendComment>?,
+    val content: String?,
     val dramaid: Int,
-    val photos: List<String>,
-    val tag: List<List<Tag>>,
-    val time: String,
-    val title: String
+    val photos: List<String>?,
+    val tag: List<List<Tag>>?,
+    val time: String?,
+    val title: String?
 )
 
 data class RecommendComment(

@@ -17,6 +17,9 @@ class MyRecommendActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         myRecommendViewModel =
             ViewModelProviders.of(this).get(MyRecommendViewModel::class.java)
+        var userId = intent.getIntExtra("userid",-1)
+        if (userId != -1)
+            myRecommendViewModel.userid = userId
         myRecommendBinding = ActivityMyRecommendBinding.inflate(layoutInflater,null,false)
         myRecommendBinding.data = myRecommendViewModel
         myRecommendBinding.lifecycleOwner = this

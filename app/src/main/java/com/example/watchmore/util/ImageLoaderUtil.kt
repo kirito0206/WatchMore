@@ -2,6 +2,7 @@ package com.example.watchmore.util
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.widget.ImageView
 import com.example.watchmore.R
 import com.nostra13.universalimageloader.core.DisplayImageOptions
@@ -41,6 +42,14 @@ object ImageLoaderUtil {
         options: DisplayImageOptions?,
         listener: ImageLoadingListener?
     ) {
+        url?.let {
+            if (it.contains("Camera") || it.contains("storage") || it.contains("emulated")){
+                var bitmap = BitmapFactory.decodeFile(url)
+                imageView?.setImageBitmap(bitmap)
+                return
+            }
+        }
+
         getImageLoader(context).displayImage(url, imageView, options, listener)
     }
 }

@@ -61,10 +61,38 @@ class RecommendViewModel(application: Application) : AndroidViewModel(applicatio
             return
         }
         if (response.value!!.status == 0){
-            recommendList.value = response.value!!.data as ArrayList<RecommendBean>
-
+            initUsers()
         }else
             page = 0
         debug(response.value.toString())
+    }
+
+    fun initUsers(){
+        val usersListTest = ArrayList<UserBean>()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            for (question in response.value!!.data){
+                question.authorid?.let { getUser(it)?.let { usersListTest.add(it) } }
+            }
+            usersList.value = usersListTest
+            recommendList.value = response.value!!.data as ArrayList<RecommendBean>
+        }
+    }
+
+    suspend fun getUser(userid : Int) : UserBean?{
+        var context = getApplication<Application>().applicationContext
+        val result = withContext(Dispatchers.IO){
+            userRepository.getUserDetail(userid)
+        }
+        if (result == null){
+            toast(context,"获取信息失败，请检查网络！！")
+            return null
+        }
+        return if (result.status == 0){
+            result.data[0]
+        }else{
+            toast(context,result.message)
+            null
+        }
     }
 }

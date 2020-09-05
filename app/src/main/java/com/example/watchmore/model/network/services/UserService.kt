@@ -2,6 +2,7 @@ package com.example.watchmore.model.network.services
 
 import com.example.watchmore.model.bean.CommonResponse
 import com.example.watchmore.model.bean.userbean.*
+import okhttp3.MultipartBody
 import retrofit2.http.*
 import java.io.File
 
@@ -37,8 +38,9 @@ interface UserService {
     @GET("get")
     suspend fun searchUsers(@Query("ask") ask : String) : UserResponse
 
+    @Multipart
     @POST("update")
-    suspend fun updateUserDetail(@Query("token") token : String,@Query("name") name : String,@Query("password") password : String,@Query("avatar") avatar : File,@Query("email") email : String) : CommonResponse
+    suspend fun updateUserDetail(@Part parts : List<MultipartBody.Part>) : CommonResponse
 
     @POST("search")
     suspend fun findPassword(@Query("email") email : String) : CommonResponse
@@ -57,6 +59,8 @@ interface UserService {
     @POST("person/ask")
     suspend fun getQuestions(@Field("token") token: String,@Field("userid") userid: Int?) : AccompanyAnimeResponse
 
-    @DELETE("user/ask")
+    @Headers("Content-Type:application/form-data")
+    @HTTP(method = "DELETE", path = "user/ask", hasBody = true)
+    @FormUrlEncoded
     suspend fun deleteQuestion(@Field("token") token : String, @Field("dramaid") dramaid : Int) : CommonResponse
 }

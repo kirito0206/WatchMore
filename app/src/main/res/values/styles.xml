@@ -18,9 +18,9 @@
 
     <!--换肤-->
     <style name="AppThemeNoActionBar.Green">
-        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimary">#43CD80</item>
         <item name="colorPrimaryDark">#388E3C</item>
-        <item name="colorAccent">#F3F5F3</item>
+        <item name="colorAccent">#43CD80</item>
         <item name="searchEditColor">#9BCD9B</item>
     </style>
 

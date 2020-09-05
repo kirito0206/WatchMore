@@ -15,8 +15,6 @@ import java.io.File
 
 
 class NineGridTestLayout : NineGridLayout {
-    private var dialog: Dialog? = null
-    private var myPagerAdapter : MyPagerAdapter? = null
     constructor(context: Context?) : super(context!!) {}
     constructor(context: Context?, attrs: AttributeSet?) : super(
         context!!,
@@ -63,6 +61,14 @@ class NineGridTestLayout : NineGridLayout {
                         newH = h * newW / w
                     }
                     setOneImageLayoutParams(imageView!!, newW, newH)
+
+                    url?.let {
+                        if (it.contains("Camera") || it.contains("storage") || it.contains("emulated")){
+                            var bitmap = BitmapFactory.decodeFile(url)
+                            imageView?.setImageBitmap(bitmap)
+                            return
+                        }
+                    }
                 }
 
                 override fun onLoadingCancelled(imageUri: String?, view: View?) {}
@@ -98,8 +104,6 @@ class NineGridTestLayout : NineGridLayout {
         url: String?,
         urlList: List<String>?
     ) {
-
-        Toast.makeText(mContext, "点击了图片$url", Toast.LENGTH_SHORT).show()
     }
 
 

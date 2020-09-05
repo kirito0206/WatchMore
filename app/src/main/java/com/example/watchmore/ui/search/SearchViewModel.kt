@@ -25,6 +25,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     private val searchModel by lazy { SearchModel() }
     val animesList = MutableLiveData<ArrayList<AnimeData>>()
     var searchContent = MutableLiveData<String>().apply { value = "" }
+    var pbVisible = MutableLiveData<Boolean>().apply { value = true }
 
     fun intentToMainSearch(view: View, tagid: String){
         var intent = Intent(view.context, MainSearchActivity::class.java)
@@ -60,13 +61,14 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         }
         if (response.value!!.status == 0){
             animesList.value = response.value!!.data as ArrayList<AnimeData>?
+            pbVisible.value = false
         }
         debug(response.value.toString())
     }
 
     fun searchAnime(){
         var list = ArrayList<AnimeData>()
-        for (anime in animesList.value!!){
+        for (anime in response.value!!.data){
             if (anime.title.contains(searchContent.value!!)){
                 list.add(anime)
             }

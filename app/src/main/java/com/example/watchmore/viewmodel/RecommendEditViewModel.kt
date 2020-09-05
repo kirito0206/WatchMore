@@ -86,6 +86,7 @@ class RecommendEditViewModel : ViewModel(){
         parts.add(MultipartBody.Part.createFormData("content",content.value))
         parts.add(MultipartBody.Part.createFormData("animetitle",animeTitle.value))
         parts.add(MultipartBody.Part.createFormData("describe",animeDescribe.value))
+        parts.add(MultipartBody.Part.createFormData("datafrom","1"))
         if (photos.value != null) {
             for (arr in photos.value!!) {
                 // TODO: 16-4-2  这里为了简单起见，没有判断file的类型

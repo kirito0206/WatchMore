@@ -3,13 +3,17 @@ package com.example.watchmore.model.network.repository
 import com.example.watchmore.model.bean.userbean.PersonResponse
 import com.example.watchmore.model.network.RetrofitHelper
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.io.File
 
 class UserRepository {
     var userService = RetrofitHelper.userService
     suspend fun createUser(name : String,password : String,repeatpd : String,email : String) = userService.createUser(name, password, repeatpd, email)
 
     suspend fun login(name : String,password : String) = userService.login(name, password)
+
+    suspend fun updateUserDetaile(parts : List<MultipartBody.Part>) = userService.updateUserDetail(parts)
 
     suspend fun logout(token : String) = userService.logout(token)
 

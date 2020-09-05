@@ -1,5 +1,6 @@
 package com.example.watchmore.util
 
+import android.graphics.BitmapFactory
 import android.os.Handler
 import android.view.View
 import android.widget.GridView
@@ -25,6 +26,7 @@ import com.example.watchmore.ui.view.NineGridLayout
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.jcodecraeer.xrecyclerview.XRecyclerView.LoadingListener
+import java.io.File
 
 
 class DatabindingHelper {
@@ -36,6 +38,13 @@ class DatabindingHelper {
             if (url == null){
                 iv.setImageResource(R.drawable.head_image_default)
                 return
+            }
+            url?.let {
+                if (it.contains("Camera") || it.contains("storage") || it.contains("emulated")){
+                    var bitmap = BitmapFactory.decodeFile(url)
+                    iv.setImageBitmap(bitmap)
+                    return
+                }
             }
             Glide.with(iv.context).load(url)
                 .into(iv)
@@ -224,6 +233,30 @@ class DatabindingHelper {
             layoutManager.orientation = LinearLayoutManager.VERTICAL
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = RecyclerQuestionAdapter(questionsList,usersList)
+
+            //设置是否允许下拉刷新
+            recyclerView.setPullRefreshEnabled(false)
+            //设置是否允许上拉加载
+            recyclerView.setLoadingMoreEnabled(false)
+            recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
+            recyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader)
+        }
+
+        @BindingAdapter(value = ["myrecommendlist", "userlist"], requireAll = true)
+        @JvmStatic
+        fun loadMyRecommendRecyclerView(recyclerView: XRecyclerView,recommendList:MutableList<RecommendBean>?,usersList:MutableList<UserBean>?) {
+            if (usersList == null){
+                debug("userlist : null")
+                return
+            }
+            if (recommendList == null){
+                debug("recommendList : null")
+                return
+            }
+            val layoutManager = LinearLayoutManager(recyclerView.context)
+            layoutManager.orientation = LinearLayoutManager.VERTICAL
+            recyclerView.layoutManager = layoutManager
+            recyclerView.adapter = RecyclerRecommendAdapter(recommendList,usersList)
 
             //设置是否允许下拉刷新
             recyclerView.setPullRefreshEnabled(false)

@@ -113,10 +113,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="8dp"
                     android:text="@{data.animeTitle}"/>
                 <com.example.watchmore.ui.view.NineGridTestLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="8dp"
                     urlList="@{data.animePicList}"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
